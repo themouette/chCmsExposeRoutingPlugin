@@ -23,7 +23,7 @@ First, enable the plugin in your project configuration:
 
 public function setup()
 {
-$this->enablePlugins(array('chCmsExposeRoutingPlugin'));
+  $this->enablePlugins(array('chCmsExposeRoutingPlugin'));
 }
 ```
 
@@ -99,7 +99,7 @@ Routing.generate('route_id', {"id": 10, "foo":"bar"});
 // will result in /foo/10/bar?foo-bar
 
 $.get(Routing.generate('route_id', {"id": 10, "foo":"bar"}));
-// will call /foo/10/bar?foo-bar
+// will call /foo/10/bar?foo=bar
 ```
 
 TODO
