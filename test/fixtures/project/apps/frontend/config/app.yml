@@ -1,0 +1,19 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+test_without_auto_discover:
+  ch_cms_expose_routing:
+    auto_discover: false
+
+test_without_auto_register:
+  ch_cms_expose_routing:
+    register_routes: false
+    register_scripts: false
+
+all:
+  ch_cms_expose_routing:
+    routes_to_expose:
+      - default
+      - default_index
+      - private_route
