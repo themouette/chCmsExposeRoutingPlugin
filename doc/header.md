@@ -4,7 +4,7 @@
 [symfony 1.(3|4)](http://www.symfony-project.org/) plugin used to expose routing definition
 to the client side.
 
-if you use [symfony2](), have a look to [Bazinga/ExposeRoutingBundle](https://github.com/Bazinga/ExposeRoutingBundle) 
+if you use [symfony2](http://symfony.com/), have a look to [Bazinga/ExposeRoutingBundle](https://github.com/Bazinga/ExposeRoutingBundle) 
 
 This file is the client side api reference.
 
