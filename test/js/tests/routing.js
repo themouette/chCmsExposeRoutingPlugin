@@ -28,7 +28,7 @@ test('route registration', function() {
 });
 
 test('route generation', function() {
-  expect(14);
+  expect(15);
 
   Routing.flush();
   equal(Routing.connect('route_1', '/route1').generate('route_1'), '/route1',
@@ -95,4 +95,16 @@ test('route generation', function() {
   equal(Routing.generate('route_8', { id: 'bar' }),
                               '/route/bar.json',
                               'route parameters overrides route defaults');
+  //
+  //test with suffix
+  Routing.variablePrefix = '{';
+  Routing.variableSuffix = '}';
+  equal(Routing.connect('route_9', '/route/{id}.{sf_format}', {'id': 'foo', 'sf_format': 'json'})
+                              .generate('route_9'),
+                              '/route/foo.json',
+                              'prefix and suffixes works');
+
+  Routing.variablePrefix = ':';
+  Routing.variableSuffix = '';
+  Routing.defaults = {};
 });

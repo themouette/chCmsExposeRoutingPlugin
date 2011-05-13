@@ -5,6 +5,7 @@ auto generated.
 
 Routing.prefix = <?php echo json_encode($options['context']['prefix']); ?>; 
 Routing.variablePrefix = <?php echo json_encode($options['variable_prefixes']); ?>; 
+Routing.variableSuffix = <?php echo json_encode($options['suffix']); ?>; 
 Routing.segmentSeparators = <?php echo json_encode($options['segment_separators']); ?>; 
 Routing.defaults = <?php echo json_encode($defaultParameters); ?>; 
 <?php foreach($exposed_routes as $id => $route): ?>

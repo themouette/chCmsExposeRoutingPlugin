@@ -50,7 +50,8 @@ var Routing = Routing || {};
 
       // return in a or
       if (_separators.length > 1) {return _separators.join('|')}
-      return _separators[0];
+      else if(_separators.length) {return _separators[0];}
+      return '';
     };
 
     /**
@@ -66,9 +67,10 @@ var Routing = Routing || {};
         var _i,
             _url = url,
             _separators = Routing.segmentSeparators,
-            _delimiters = regexify(Routing.variablePrefix),
-            _prefix = '(' + regexify(_separators, '^') + ')' + _delimiters,
-            _suffix = '(' + regexify(_separators, '$') + ')';
+            _prefixes = regexify(Routing.variablePrefix),
+            _suffixes = regexify(Routing.variableSuffix),
+            _prefix = '(' + regexify(_separators, '^') + ')' + _prefixes,
+            _suffix = _suffixes + '(' + regexify(_separators, '$') + ')';
         for (_i in params) {
           var _r = new RegExp(_prefix + _i + _suffix, '');
 
@@ -88,6 +90,13 @@ var Routing = Routing || {};
        * @api public
        */
       defaults: {},
+      /**
+       * route parameter suffix.
+       *
+       * @type {String}
+       * @api public
+       */
+      variableSuffix: '',
       /**
        * route parameter prefix.
        *
