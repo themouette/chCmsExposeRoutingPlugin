@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Routing</title>
+		<title>chCmsExposeRoutingPlugin</title>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<style>body {
     margin: 0;
@@ -108,13 +108,30 @@ code .this { color: #19469D; }</style>
 		</script>
 	</head>
 	<body>
-<table id="source"><tbody><tr><td><h1>Routing</h1></td><td></td></tr><tr class="filename"><td><h2 id="web/js/routing.js"><a href="#">routing</a></h2></td><td>web/js/routing.js</td></tr><tr class="code">
+<table id="source"><tbody><tr><td><h1>chCmsExposeRoutingPlugin</h1><h2>What is this ?</h2>
+
+<p><a href="http://themouette.github.com/chCmsExposeRoutingPlugin/">chCmsExposeRoutingPlugin</a> is a 
+<a href="http://www.symfony-project.org/">symfony 1.(3|4)</a> plugin used to expose routing definition
+to the client side.</p>
+
+<p>This file is the client side api reference.</p>
+
+<h2>Basic usage</h2>
+
+<p>in your script just access a server side route this way:</p>
+
+<pre><code>Routing.get('your route name');</code></pre>
+
+<p>You can generate a url this way:</p>
+
+<pre><code>Routing.generate('your_route_name', {'foo': 'bar', 'baz': 1});</code></pre></td><td></td></tr><tr class="filename"><td><h2 id="web/js/routing.js"><a href="#">routing</a></h2></td><td>web/js/routing.js</td></tr><tr class="code">
 <td class="docs">
-<p>this file defines the routing api
+<p>define Routing class
  </p>
 </td>
 <td class="code">
 <pre><code><span class="keyword">var</span> <span class="class">Routing</span> = <span class="class">Routing</span> || {};
+
 (<span class="keyword">function</span>(<span class="class">Routing</span>, $, <span class="variable">undefined</span>) {
 
   <span class="comment">// now register our routing methods</span>
@@ -124,25 +141,26 @@ code .this { color: #19469D; }</style>
         <span class="variable">rquery</span> = <span class="regexp">/\?/</span>,
         <span class="variable">rabsurl</span> = <span class="regexp">/^\/</span>/,
         <span class="variable">rescregexp</span> = <span class="regexp">/[-[\]{}()*+?.,\\^$|#\s]/g</span>,
-        <span class="variable">rdblslash</span> = <span class="regexp">/\/</span>\<span class="comment">//g;</span>
+        <span class="variable">rdblslash</span> = <span class="regexp">/\/</span>\<span class="comment">//g;</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><strong>api</strong>: <em>private</em></li></ul>
 
-    <span class="keyword">function</span> <span class="variable">regexify</span>(</code></pre>
-</td>
-</tr>
-<tr class="code">
-<td class="docs">
-<p>Array|string</p>
-</td>
-<td class="code">
-<pre><code><span class="variable">separators</span>,</code></pre>
-</td>
-</tr>
-<tr class="code">
-<td class="docs">
-<p> string </p>
+<p>prepare a regexp part with several caracters/parts
+having to be escaped.</p>
+
+<p>   regexify('a'); // returns 'a'
+   regexify(['a', '.']); // returns 'a|.'
+   regexify(['a', '.'], '$'); // returns 'a|.|$'</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Array | string</em>   separators  a list of separators.</p></li><li><p><strong>param</strong>: <em>String</em>         unescaped   a meta character to use in regexp.</p></li><li><p><strong>return</strong>: <em>String</em>       the regexp part, ready to use.</p><p> </p></li></ul>
 </td>
 <td class="code">
-<pre><code><span class="variable">unescaped</span>) {
+<pre><code><span class="keyword">function</span> <span class="variable">regexify</span>(<span class="variable">separators</span>, <span class="variable">unescaped</span>) {
       <span class="keyword">var</span> <span class="variable">_i</span>, <span class="variable">_separators</span> = [];
       <span class="comment">// make sure separator is an array</span>
       <span class="keyword">if</span> (!$.<span class="variable">isArray</span>(<span class="variable">separators</span>)) {
@@ -160,10 +178,43 @@ code .this { color: #19469D; }</style>
       <span class="keyword">return</span> <span class="variable">_separators</span>[<span class="number integer">0</span>];
     };
 
-    <span class="keyword">return</span> {
-      <span class="variable">variablePrefix</span>: <span class="string">':'</span>,
-      <span class="variable">segmentSeparators</span>: [<span class="string">'/'</span>, <span class="string">'.'</span>],
-      <span class="variable">prefix</span>: <span class="string">''</span>,</code></pre>
+    <span class="keyword">return</span> {</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>route parameter prefix.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>type</strong>: <em>String</em> </p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">variablePrefix</span>: <span class="string">':'</span>,</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>route url separator list/</p>
+
+<h2></h2>
+
+<ul><li><p><strong>type</strong>: <em>String | Array</em> </p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">segmentSeparators</span>: [<span class="string">'/'</span>, <span class="string">'.'</span>],</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>route url prefix to use.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>type</strong>: <em>String</em> </p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">prefix</span>: <span class="string">''</span>,</code></pre>
 </td>
 </tr>
 <tr class="code">
@@ -172,7 +223,7 @@ code .this { color: #19469D; }</style>
 
 <h2></h2>
 
-<ul><li><p><strong>param</strong>: <em>String</em>   route_id  the id of route to generate url for.</p></li><li><p><strong>param</strong>: <em>Objects</em>  params    the parameters to append to the route.</p></li><li><p><strong>return</strong>: <em>String</em>  generated url.</p><p>   </p></li></ul>
+<ul><li><p><strong>param</strong>: <em>String</em>   route_id  the id of route to generate url for.</p></li><li><p><strong>param</strong>: <em>Objects</em>  params    the parameters to append to the route.</p></li><li><p><strong>return</strong>: <em>String</em>  generated url.</p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
 </td>
 <td class="code">
 <pre><code><span class="variable">generate</span>: <span class="keyword">function</span>(<span class="variable">route_id</span>, <span class="variable">params</span>) {
@@ -217,7 +268,7 @@ code .this { color: #19469D; }</style>
 
 <h2></h2>
 
-<ul><li><p><strong>param</strong>: <em>String</em>  id       the route id.</p></li><li><p><strong>param</strong>: <em>String</em>  pattern  the url pattern.</p></li><li><p><strong>return</strong>: <em>Object</em>  Routing.</p><p>   </p></li></ul>
+<ul><li><p><strong>param</strong>: <em>String</em>  id       the route id.</p></li><li><p><strong>param</strong>: <em>String</em>  pattern  the url pattern.</p></li><li><p><strong>return</strong>: <em>Object</em>  Routing.</p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
 </td>
 <td class="code">
 <pre><code><span class="variable">connect</span>: <span class="keyword">function</span>(<span class="variable">id</span>, <span class="variable">pattern</span>) {
@@ -232,7 +283,7 @@ code .this { color: #19469D; }</style>
 
 <h2></h2>
 
-<ul><li><p><strong>param</strong>: <em>String</em>  route_id the route id to retrieve.</p></li><li><p><strong>return</strong>: <em>String</em>  requested route.</p><p>   </p></li></ul>
+<ul><li><p><strong>param</strong>: <em>String</em>  route_id the route id to retrieve.</p></li><li><p><strong>return</strong>: <em>String</em>  requested route.</p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
 </td>
 <td class="code">
 <pre><code><span class="variable">get</span>: <span class="keyword">function</span>(<span class="variable">route_id</span>) {
@@ -246,7 +297,7 @@ code .this { color: #19469D; }</style>
 
 <h2></h2>
 
-<ul><li><p><strong>param</strong>: <em>String</em>  route_id the route id to retrieve.</p></li><li><p><strong>return</strong>: <em>Boolean</em>  wether the route is registered or not.</p><p>   </p></li></ul>
+<ul><li><p><strong>param</strong>: <em>String</em>  route_id the route id to retrieve.</p></li><li><p><strong>return</strong>: <em>Boolean</em>  wether the route is registered or not.</p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
 </td>
 <td class="code">
 <pre><code><span class="variable">has</span>: <span class="keyword">function</span>(<span class="variable">route_id</span>) {
@@ -256,12 +307,16 @@ code .this { color: #19469D; }</style>
 </tr>
 <tr class="code">
 <td class="docs">
-<p>clears all routes
-       </p>
+<p>clears all routes</p>
+
+<h2></h2>
+
+<ul><li><p><strong>return</strong>: <em>Object</em>  Routing.</p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
 </td>
 <td class="code">
 <pre><code><span class="variable">flush</span>: <span class="keyword">function</span>() {
         <span class="variable">_routes</span> = {};
+        <span class="keyword">return</span> <span class="class">Routing</span>;
       }
     }; <span class="comment">// end of return</span>
   })());
