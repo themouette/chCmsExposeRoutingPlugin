@@ -49,7 +49,7 @@ You can *disable the script auto inclusion* by adding the following in your *rou
 
 ```yml
 app:
-  ch_cms_expose_routing
+  ch_cms_expose_routing:
     register_scripts: false # you will have to register scripts manually
 ```
 
@@ -57,7 +57,7 @@ You can *disable the route auto declaration* by adding the following in your *ro
 
 ```yml
 app:
-  ch_cms_expose_routing
+  ch_cms_expose_routing:
     register_routes: false # you will have to register script route manually
 ```
 
@@ -104,7 +104,7 @@ in your application config ( _app.yml_ ), add the following:
 
 ```yml
 app:
-  ch_cms_expose_routing
+  ch_cms_expose_routing:
     routes_to_expose:
       - my_first_route_to_expose
       - another_route
@@ -117,7 +117,7 @@ just add the following to your application config ( _app.yml_ ):
 
 ```yml
 app:
-  ch_cms_expose_routing
+  ch_cms_expose_routing:
     auto_discover: false
 ```
 
