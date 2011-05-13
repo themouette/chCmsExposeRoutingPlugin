@@ -96,7 +96,7 @@ var Routing = Routing || {};
        */
       variablePrefix: ':',
       /**
-       * route url separator list/
+       * route url separator list.
        *
        * @type {String|Array}
        * @api public
