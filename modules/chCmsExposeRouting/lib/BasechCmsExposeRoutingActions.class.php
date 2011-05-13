@@ -18,18 +18,25 @@ abstract class BasechCmsExposeRoutingActions extends sfActions
    */
   public function executeIndex(sfWebRequest $request)
   {
-    $routes = $this->getContext()->getRouting()->getRoutes();
-    $this->exposed_routes = array();
-    $routingOptions = $this->getContext()->getRouting()->getOptions();
-    $this->prefix = $routingOptions['context']['prefix'];
+    $routing = $this->getContext()->getRouting();
+
+    // set defaults
+    $routingOptions = $routing->getOptions();
+    $this->setVar('options', $routingOptions, true);
+    $this->setVar('defaultParameters', $routing->getDefaultParameters(), true);
+
+    // filter exposed routes
+    $routes = $routing->getRoutes();
+    $exposed_routes = array();
 
     foreach ($routes as $route_id => $route) 
     {
       $options = $route->getOptions();
       if (isset($options['app_expose']) && $options['app_expose'])
       {
-        $this->exposed_routes[$route_id] = $route;
+        $exposed_routes[$route_id] = $route;
       }
     }
+    $this->setVar('exposed_routes', $exposed_routes, true);
   }
 }
