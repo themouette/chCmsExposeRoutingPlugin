@@ -138,6 +138,7 @@ to the client side.</p>
   $.<span class="variable">extend</span>(<span class="class">Routing</span>, (<span class="keyword">function</span>() {
 
     <span class="keyword">var</span> <span class="variable">_routes</span> = {},
+        <span class="variable">_defaults</span> = {},
         <span class="variable">rquery</span> = <span class="regexp">/\?/</span>,
         <span class="variable">rabsurl</span> = <span class="regexp">/^\/</span>/,
         <span class="variable">rescregexp</span> = <span class="regexp">/[-[\]{}()*+?.,\\^$|#\s]/g</span>,
@@ -176,9 +177,49 @@ having to be escaped.</p>
       <span class="comment">// return in a or</span>
       <span class="keyword">if</span> (<span class="variable">_separators</span>.<span class="variable">length</span> &<span class="variable">gt</span>; <span class="number integer">1</span>) {<span class="keyword">return</span> <span class="variable">_separators</span>.<span class="variable">join</span>(<span class="string">'|'</span>)}
       <span class="keyword">return</span> <span class="variable">_separators</span>[<span class="number integer">0</span>];
-    };
+    };</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>replace params in given url.
+<strong>WARNING:</strong> used params are removed.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  url the raw url.</p></li><li><p><strong>param</strong>: <em>Object</em>  params the params to replace.</p></li><li><p><strong>return</strong>: <em>String</em>  the treated url.</p></li><li><p><strong>api</strong>: <em>private</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">replace_params</span>(<span class="variable">url</span>, <span class="variable">params</span>) {
+        <span class="keyword">var</span> <span class="variable">_i</span>,
+            <span class="variable">_url</span> = <span class="variable">url</span>,
+            <span class="variable">_separators</span> = <span class="class">Routing</span>.<span class="variable">segmentSeparators</span>,
+            <span class="variable">_delimiters</span> = <span class="variable">regexify</span>(<span class="class">Routing</span>.<span class="variable">variablePrefix</span>),
+            <span class="variable">_prefix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'^'</span>) + <span class="string">')'</span> + <span class="variable">_delimiters</span>,
+            <span class="variable">_suffix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'$'</span>) + <span class="string">')'</span>;
+        <span class="keyword">for</span> (<span class="variable">_i</span> <span class="keyword">in</span> <span class="variable">params</span>) {
+          <span class="keyword">var</span> <span class="variable">_r</span> = <span class="keyword">new</span> <span class="class">RegExp</span>(<span class="variable">_prefix</span> + <span class="variable">_i</span> + <span class="variable">_suffix</span>, <span class="string">''</span>);
+
+          <span class="keyword">if</span> (<span class="variable">_r</span>.<span class="variable">test</span>(<span class="variable">_url</span>)) {
+            <span class="variable">_url</span> = <span class="variable">_url</span>.<span class="variable">replace</span>(<span class="variable">_r</span>, <span class="string">'$1'</span> + <span class="variable">params</span>[<span class="variable">_i</span>] + <span class="string">'$2'</span>);
+            <span class="keyword">delete</span>(<span class="variable">params</span>[<span class="variable">_i</span>]);
+          }
+        }
+
+        <span class="keyword">return</span> <span class="variable">_url</span>;
+    }
 
     <span class="keyword">return</span> {</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>default routing parameters for every routes.</p>
+
+<ul><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">defaults</span>: {},</code></pre>
 </td>
 </tr>
 <tr class="code">
@@ -228,12 +269,7 @@ having to be escaped.</p>
 <td class="code">
 <pre><code><span class="variable">generate</span>: <span class="keyword">function</span>(<span class="variable">route_id</span>, <span class="variable">params</span>) {
         <span class="keyword">var</span> <span class="variable">_route</span> = <span class="class">Routing</span>.<span class="variable">get</span>(<span class="variable">route_id</span>),
-            <span class="variable">_i</span>,
-            <span class="variable">_separators</span> = <span class="class">Routing</span>.<span class="variable">segmentSeparators</span>,
-            <span class="variable">_delimiters</span> = <span class="variable">regexify</span>(<span class="class">Routing</span>.<span class="variable">variablePrefix</span>),
-            <span class="variable">_prefix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'^'</span>) + <span class="string">')'</span> + <span class="variable">_delimiters</span>,
-            <span class="variable">_suffix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'$'</span>) + <span class="string">')'</span>,
-            <span class="variable">_params</span> = $.<span class="variable">extend</span>({}, <span class="variable">params</span> || {}),
+            <span class="variable">_params</span> = $.<span class="variable">extend</span>({}, <span class="variable">_defaults</span>[<span class="variable">route_id</span>] || {}, <span class="variable">params</span> || {}),
             <span class="variable">_queryString</span>,
             <span class="variable">_url</span> = <span class="variable">_route</span>;
 
@@ -241,15 +277,13 @@ having to be escaped.</p>
           <span class="keyword">throw</span> <span class="string">'No matching route for '</span> + <span class="variable">route_id</span>;
         }
 
-        <span class="keyword">for</span> (<span class="variable">_i</span> <span class="keyword">in</span> <span class="variable">_params</span>) {
-          <span class="keyword">var</span> <span class="variable">_r</span> = <span class="keyword">new</span> <span class="class">RegExp</span>(<span class="variable">_prefix</span> + <span class="variable">_i</span> + <span class="variable">_suffix</span>, <span class="string">''</span>);
+        <span class="comment">// replace with params then defaults</span>
+        <span class="variable">_url</span> = <span class="variable">replace_params</span>(<span class="variable">_url</span>, <span class="variable">_params</span>);
+        <span class="variable">_url</span> = <span class="variable">replace_params</span>(<span class="variable">_url</span>, $.<span class="variable">extend</span>({}, <span class="class">Routing</span>.<span class="variable">defaults</span> || {}));
 
-          <span class="keyword">if</span> (<span class="variable">_r</span>.<span class="variable">test</span>(<span class="variable">_url</span>)) {
-            <span class="variable">_url</span> = <span class="variable">_url</span>.<span class="variable">replace</span>(<span class="variable">_r</span>, <span class="string">'$1'</span> + <span class="variable">_params</span>[<span class="variable">_i</span>] + <span class="string">'$2'</span>);
-            <span class="keyword">delete</span>(<span class="variable">_params</span>[<span class="variable">_i</span>]);
-          }
-        }
+        <span class="comment">// remaining params as query string</span>
         <span class="variable">_queryString</span> = $.<span class="variable">param</span>(<span class="variable">_params</span>);
+
         <span class="keyword">if</span> (<span class="variable">_queryString</span>.<span class="variable">length</span>) {
           <span class="variable">_url</span> += (<span class="variable">rquery</span>.<span class="variable">test</span>(<span class="variable">_url</span>) ? <span class="string">'&amp;'</span> : <span class="string">'?'</span>) + <span class="variable">_queryString</span>;
         }
@@ -271,8 +305,9 @@ having to be escaped.</p>
 <ul><li><p><strong>param</strong>: <em>String</em>  id       the route id.</p></li><li><p><strong>param</strong>: <em>String</em>  pattern  the url pattern.</p></li><li><p><strong>return</strong>: <em>Object</em>  Routing.</p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
 </td>
 <td class="code">
-<pre><code><span class="variable">connect</span>: <span class="keyword">function</span>(<span class="variable">id</span>, <span class="variable">pattern</span>) {
+<pre><code><span class="variable">connect</span>: <span class="keyword">function</span>(<span class="variable">id</span>, <span class="variable">pattern</span>, <span class="variable">defaults</span>) {
         <span class="variable">_routes</span>[<span class="variable">id</span>] = <span class="variable">pattern</span>;
+        <span class="variable">_defaults</span>[<span class="variable">id</span>] = <span class="variable">defaults</span> || {};
         <span class="keyword">return</span> <span class="class">Routing</span>;
       },</code></pre>
 </td>
@@ -316,6 +351,7 @@ having to be escaped.</p>
 <td class="code">
 <pre><code><span class="variable">flush</span>: <span class="keyword">function</span>() {
         <span class="variable">_routes</span> = {};
+        <span class="variable">_defaults</span> = {};
         <span class="keyword">return</span> <span class="class">Routing</span>;
       }
     }; <span class="comment">// end of return</span>
