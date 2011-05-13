@@ -64,28 +64,56 @@ my_custom_route_name:
   params: { module: chCmsExposeRouting, action: index }
 ```
 
-### register your routes
+### register your exposed routes
+
+#### make a route exposable
 
 the only thing you need to do is to add an _app_expose_ option:
 
 ```yml
 // app/{your_app}/config/routing.yml
 
+# this route will be exposed if auto_discover is true
 my_route_to_expose:
   url:  /foo/:id/bar
   params: { action: foo, module: bar }
   options:
     app_expose: true
 
+# this route will NEVER be exposed
 my_secret_route:
   url:  /foo/:id/bar/1
   params: { action: foo, module: bar }
   options:
     app_expose: false
 
-another_secret_route:
+# this route will be exposed if forced, but not autodetected
+a_default route:
   url:  /foo/:id/bar/2
   params: { action: foo, module: bar }
+```
+
+#### force a route exposition
+
+in your application config ( _app.yml_ ), add the following:
+
+```yml
+app:
+  ch_cms_expose_routing
+    routes_to_expose:
+      - my_first_route_to_expose
+      - another_route
+```
+
+#### expose all exposable routes
+
+if you want to expose all routes with _app_expose_ option to true, 
+just add the following to your application config ( _app.yml_ ):
+
+```yml
+app:
+  ch_cms_expose_routing
+    auto_discover: false
 ```
 
 ### access routes in browser
