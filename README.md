@@ -14,7 +14,7 @@ You need jquery to use this plugin. jQuery is not bundeled with this plugin, you
 How does it work ?
 ------------------
 
-### enable
+### Enable
 
 First, enable the plugin in your project configuration:
 
@@ -37,6 +37,32 @@ Then enable *chCmsExposeRouting* in your application:
     ```
 
 you're done !
+
+### More conf
+
+You can *disable the script auto inclusion* by adding the following in your *routing.yml*
+
+```yml
+app:
+  ch_cms_expose_routing
+    register_scripts: false # you will have to register scripts manually
+```
+
+You can *disable the route auto declaration* by adding the following in your *routing.yml*
+
+```yml
+app:
+  ch_cms_expose_routing
+    register_routes: false # you will have to register script route manually
+```
+
+and the register your route this way:
+
+```yml
+my_custom_route_name:
+  url: /my/url/route.js
+  params: { module: chCmsExposeRouting, action: index }
+```
 
 ### register your routes
 

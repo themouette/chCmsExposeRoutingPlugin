@@ -28,7 +28,7 @@ class chCmsExposeRoutingPluginConfiguration extends sfPluginConfiguration
    **/
   public function listenToRoutingLoadConfigurationEvent(sfEvent $event)
   {
-    if (in_array('chCmsExposeRouting', sfConfig::get('sf_enabled_modules')))
+    if (in_array('chCmsExposeRouting', sfConfig::get('sf_enabled_modules')) && sfConfig::get('app_ch_cms_expose_routing_register_routes', true))
     {
       $this->dispatcher->notify(new sfEvent($this, 'application.log', array('register chCmsExposeRoutingPlugin route', 'priority' => sfLogger::INFO)));
       $event->getSubject()->prependRoute('ch_cms_expose_routing', new sfRequestRoute(
@@ -47,13 +47,13 @@ class chCmsExposeRoutingPluginConfiguration extends sfPluginConfiguration
    **/
   public function listenToLoadFactoriesEvent(sfEvent $event)
   {
-    if (in_array('chCmsExposeRouting', sfConfig::get('sf_enabled_modules')))
+    if (in_array('chCmsExposeRouting', sfConfig::get('sf_enabled_modules')) && sfConfig::get('app_ch_cms_expose_routing_register_scripts', true))
     {
       $this->dispatcher->notify(new sfEvent($this, 'application.log', array('register chCmsExposeRoutingPlugin scripts', 'priority' => sfLogger::INFO)));
       $response = $event->getSubject()->getResponse();
       $routing  = $event->getSubject()->getRouting();
       $response->addJavascript('/chCmsExposeRoutingPlugin/js/routing', sfWebResponse::MIDDLE);
-      $response->addJavascript($routing->generate('ch_cms_expose_routing'), sfWebResponse::MIDDLE);
+      $response->addJavascript($routing->generate('ch_cms_expose_routing'), sfWebResponse::LAST);
     }
   }
 }
