@@ -4,7 +4,12 @@ chCmsExposeRoutingPlugin: expose your symfony routes to javascript
 Goal
 ----
 
-this plugin is used to expose your symfony routes to your javascript.
+[chCmsExposeRoutingPlugin](http://themouette.github.com/chCmsExposeRoutingPlugin/) is a 
+[symfony 1.(3|4)](http://www.symfony-project.org/) plugin used to expose routing definition
+to the client side.
+
+if you use [symfony2](), have a look to [Bazinga/ExposeRoutingBundle](https://github.com/Bazinga/ExposeRoutingBundle) 
+
 
 Requirement
 -----------
@@ -134,6 +139,4 @@ TODO
 ----
 
 * add test structure
-* include all routes
-* define routes to include in an other way ?
 * cache js routing
