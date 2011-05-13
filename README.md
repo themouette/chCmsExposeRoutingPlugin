@@ -18,28 +18,31 @@ How does it work ?
 
 First, enable the plugin in your project configuration:
 
-    [php]
+    ```php
     // config/ProjectConfiguration.class.php
 
     public function setup()
     {
       $this->enablePlugins(array('chCmsExposeRoutingPlugin'));
     }
+    ```
 
 Then enable *chCmsExposeRouting* in your application:
 
-    [yml]
+    ```yml
     # app/{your_app}/config/settins.yml
 
         enabled_modules:
           - chCmsExposeRouting
+    ```
 
 you're done !
 
 ### register your routes
 
 the only thing you need to do is to add an _app_expose_ option:
-    [yml]
+
+    ```yml
     // app/{your_app}/config/routing.yml
 
     my_route_to_expose:
@@ -57,12 +60,13 @@ the only thing you need to do is to add an _app_expose_ option:
     another_secret_route:
       url:  /foo/:id/bar/2
       params: { action: foo, module: bar }
+    ```
 
 ### access routes in browser
 
 It's as simple as calling `Routing.generate('route_id', /* your params */)`.
 
-    [js]
+    ```js
     Routing.generate('route_id', {id: 10});
     // will result in /foo/10/bar
     Routing.generate('route_id', {"id": 10, "foo":"bar"});
@@ -70,12 +74,12 @@ It's as simple as calling `Routing.generate('route_id', /* your params */)`.
     
     $.get(Routing.generate('route_id', {"id": 10, "foo":"bar"}));
     // will call /foo/10/bar?foo-bar
+    ```
 
 TODO
 ----
 
 * add test structure
-* default route parameter
 * disable auto include for js
 * include all routes
 * define routes to include in an other way ?
