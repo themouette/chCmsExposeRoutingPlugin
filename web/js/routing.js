@@ -16,6 +16,7 @@ var Routing = Routing || {};
   $.extend(Routing, (function() {
 
     var _routes = {},
+        _defaults = {},
         rquery = /\?/,
         rabsurl = /^\//,
         rescregexp = /[-[\]{}()*+?.,\\^$|#\s]/g,
@@ -52,7 +53,41 @@ var Routing = Routing || {};
       return _separators[0];
     };
 
+    /**
+     * replace params in given url.
+     * **WARNING:** used params are removed.
+     *
+     * @param {String} url the raw url.
+     * @param {Object} params the params to replace.
+     * @return {String} the treated url.
+     * @api private
+     */
+    function replace_params(url, params) {
+        var _i,
+            _url = url,
+            _separators = Routing.segmentSeparators,
+            _delimiters = regexify(Routing.variablePrefix),
+            _prefix = '(' + regexify(_separators, '^') + ')' + _delimiters,
+            _suffix = '(' + regexify(_separators, '$') + ')';
+        for (_i in params) {
+          var _r = new RegExp(_prefix + _i + _suffix, '');
+
+          if (_r.test(_url)) {
+            _url = _url.replace(_r, '$1' + params[_i] + '$2');
+            delete(params[_i]);
+          }
+        }
+
+        return _url;
+    }
+
     return {
+      /**
+       * default routing parameters for every routes.
+       *
+       * @api public
+       */
+      defaults: {},
       /**
        * route parameter prefix.
        *
@@ -84,12 +119,7 @@ var Routing = Routing || {};
        */
       generate: function(route_id, params) {
         var _route = Routing.get(route_id),
-            _i,
-            _separators = Routing.segmentSeparators,
-            _delimiters = regexify(Routing.variablePrefix),
-            _prefix = '(' + regexify(_separators, '^') + ')' + _delimiters,
-            _suffix = '(' + regexify(_separators, '$') + ')',
-            _params = $.extend({}, params || {}),
+            _params = $.extend({}, _defaults[route_id] || {}, params || {}),
             _queryString,
             _url = _route;
 
@@ -97,15 +127,13 @@ var Routing = Routing || {};
           throw 'No matching route for ' + route_id;
         }
 
-        for (_i in _params) {
-          var _r = new RegExp(_prefix + _i + _suffix, '');
+        // replace with params then defaults
+        _url = replace_params(_url, _params);
+        _url = replace_params(_url, $.extend({}, Routing.defaults || {}));
 
-          if (_r.test(_url)) {
-            _url = _url.replace(_r, '$1' + _params[_i] + '$2');
-            delete(_params[_i]);
-          }
-        }
+        // remaining params as query string
         _queryString = $.param(_params);
+
         if (_queryString.length) {
           _url += (rquery.test(_url) ? '&' : '?') + _queryString;
         }
@@ -124,8 +152,9 @@ var Routing = Routing || {};
        * @return {Object} Routing.
        * @api public
        */
-      connect: function(id, pattern) {
+      connect: function(id, pattern, defaults) {
         _routes[id] = pattern;
+        _defaults[id] = defaults || {};
         return Routing;
       },
       /**
@@ -156,6 +185,7 @@ var Routing = Routing || {};
        */
       flush: function() {
         _routes = {};
+        _defaults = {};
         return Routing;
       }
     }; // end of return
