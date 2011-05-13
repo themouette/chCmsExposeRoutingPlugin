@@ -1,0 +1,28 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+exposed_route:
+  url: /exposed
+  params: { module: test, action: test}
+  options:
+    app_expose: true
+
+private_route:
+  url: /private
+  params: {}
+  options:
+    app_expose: false
+
+# default rules
+homepage:
+  url:   /
+  param: { module: default, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
