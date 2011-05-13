@@ -176,7 +176,8 @@ having to be escaped.</p>
 
       <span class="comment">// return in a or</span>
       <span class="keyword">if</span> (<span class="variable">_separators</span>.<span class="variable">length</span> &<span class="variable">gt</span>; <span class="number integer">1</span>) {<span class="keyword">return</span> <span class="variable">_separators</span>.<span class="variable">join</span>(<span class="string">'|'</span>)}
-      <span class="keyword">return</span> <span class="variable">_separators</span>[<span class="number integer">0</span>];
+      <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">_separators</span>.<span class="variable">length</span>) {<span class="keyword">return</span> <span class="variable">_separators</span>[<span class="number integer">0</span>];}
+      <span class="keyword">return</span> <span class="string">''</span>;
     };</code></pre>
 </td>
 </tr>
@@ -194,9 +195,10 @@ having to be escaped.</p>
         <span class="keyword">var</span> <span class="variable">_i</span>,
             <span class="variable">_url</span> = <span class="variable">url</span>,
             <span class="variable">_separators</span> = <span class="class">Routing</span>.<span class="variable">segmentSeparators</span>,
-            <span class="variable">_delimiters</span> = <span class="variable">regexify</span>(<span class="class">Routing</span>.<span class="variable">variablePrefix</span>),
-            <span class="variable">_prefix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'^'</span>) + <span class="string">')'</span> + <span class="variable">_delimiters</span>,
-            <span class="variable">_suffix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'$'</span>) + <span class="string">')'</span>;
+            <span class="variable">_prefixes</span> = <span class="variable">regexify</span>(<span class="class">Routing</span>.<span class="variable">variablePrefix</span>),
+            <span class="variable">_suffixes</span> = <span class="variable">regexify</span>(<span class="class">Routing</span>.<span class="variable">variableSuffix</span>),
+            <span class="variable">_prefix</span> = <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'^'</span>) + <span class="string">')'</span> + <span class="variable">_prefixes</span>,
+            <span class="variable">_suffix</span> = <span class="variable">_suffixes</span> + <span class="string">'('</span> + <span class="variable">regexify</span>(<span class="variable">_separators</span>, <span class="string">'$'</span>) + <span class="string">')'</span>;
         <span class="keyword">for</span> (<span class="variable">_i</span> <span class="keyword">in</span> <span class="variable">params</span>) {
           <span class="keyword">var</span> <span class="variable">_r</span> = <span class="keyword">new</span> <span class="class">RegExp</span>(<span class="variable">_prefix</span> + <span class="variable">_i</span> + <span class="variable">_suffix</span>, <span class="string">''</span>);
 
@@ -224,6 +226,18 @@ having to be escaped.</p>
 </tr>
 <tr class="code">
 <td class="docs">
+<p>route parameter suffix.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>type</strong>: <em>String</em> </p></li><li><p><strong>api</strong>: <em>public</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">variableSuffix</span>: <span class="string">''</span>,</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
 <p>route parameter prefix.</p>
 
 <h2></h2>
@@ -236,7 +250,7 @@ having to be escaped.</p>
 </tr>
 <tr class="code">
 <td class="docs">
-<p>route url separator list/</p>
+<p>route url separator list.</p>
 
 <h2></h2>
 
