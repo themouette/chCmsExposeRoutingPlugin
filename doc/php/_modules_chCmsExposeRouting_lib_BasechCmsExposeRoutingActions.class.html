@@ -1,0 +1,243 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">modules/chCmsExposeRouting/lib/BasechCmsExposeRoutingActions.class.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>author</dt>
+<dd>Your name here</dd>
+<dt>package</dt>
+<dd>chCmsExposeRoutingPlugin</dd>
+<dt>subpackage</dt>
+<dd>chCmsExposeRouting</dd>
+<dt>version</dt>
+<dd>SVN: $Id$</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#BasechCmsExposeRoutingActions">BasechCmsExposeRoutingActions</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Base actions for the chCmsExposeRoutingPlugin chCmsExposeRouting module.</p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="BasechCmsExposeRoutingActions"></a><h2 class="class">BasechCmsExposeRoutingActions<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd>sfActions</dd>
+<dt>author</dt>
+<dd>Your name here</dd>
+<dt>package</dt>
+<dd>chCmsExposeRoutingPlugin</dd>
+<dt>subpackage</dt>
+<dd>chCmsExposeRouting</dd>
+<dt>version</dt>
+<dd>SVN: $Id$</dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#BasechCmsExposeRoutingActions::retrieveRoute()">retrieveRoute</a></dd>
+<dd><a class="method" href="#BasechCmsExposeRoutingActions::applicationConfiguredRoutes()">applicationConfiguredRoutes</a></dd>
+<dd><a class="method" href="#BasechCmsExposeRoutingActions::autoDiscoverExposedRoutes()">autoDiscoverExposedRoutes</a></dd>
+<dd><a class="method" href="#BasechCmsExposeRoutingActions::executeIndex()">executeIndex</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Base actions for the chCmsExposeRoutingPlugin chCmsExposeRouting module.</p>
+<div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="BasechCmsExposeRoutingActions::applicationConfiguredRoutes()"></a><h4 class="method">applicationConfiguredRoutes<div class="to-top"><a href="#BasechCmsExposeRoutingActions">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">applicationConfiguredRoutes</span><span class="nb-faded-text">(
+           $routing
+          )
+        </span>
+        :
+        array</code><p class="short-description">adds the application configured routes.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$routing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="BasechCmsExposeRoutingActions::autoDiscoverExposedRoutes()"></a><h4 class="method">autoDiscoverExposedRoutes<div class="to-top"><a href="#BasechCmsExposeRoutingActions">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">autoDiscoverExposedRoutes</span><span class="nb-faded-text">(
+           $routing
+          )
+        </span>
+        :
+        array</code><p class="short-description">iterate over every routes to retrive routes
+with *app_expose* option set to true.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$routing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="BasechCmsExposeRoutingActions::executeIndex()"></a><h4 class="method">executeIndex<div class="to-top"><a href="#BasechCmsExposeRoutingActions">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">executeIndex</span><span class="nb-faded-text">(
+          sfWebRequest $request
+          )
+        </span>
+        :
+        </code><p class="short-description">retrieve all the routes that should be exposed</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$request</dt>
+<dd>sfWebRequest<br><em>the user request</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="BasechCmsExposeRoutingActions::retrieveRoute()"></a><h4 class="method">retrieveRoute<div class="to-top"><a href="#BasechCmsExposeRoutingActions">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">retrieveRoute</span><span class="nb-faded-text">(
+          string $route_id,  $routing
+          )
+        </span>
+        :
+        sfRoute|null</code><p class="short-description">retrive matching route and check it can be displayed.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$route_id</dt>
+<dd>string<br><em>the id of route to retrieve</em>
+</dd>
+<dt>$routing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>sfRoute|null</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>

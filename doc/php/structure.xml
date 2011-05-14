@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<project version="0.10.0" title="">
+  <file path="config/chCmsExposeRoutingPluginConfiguration.class.php" hash="abdad1f0d32991d0a1926c2dbba1f3bd">
+    <docblock>
+      <description>chCmsExposeRoutingPlugin configuration.</description>
+      <long-description>
+</long-description>
+      <tag name="package" description="chCmsExposeRoutingPlugin"/>
+      <tag name="subpackage" description="config"/>
+      <tag name="author" description="Your name here"/>
+      <tag name="version" description="SVN: $Id$"/>
+    </docblock>
+    <class final="false" abstract="false" line="11" namespace="default">
+      <name>chCmsExposeRoutingPluginConfiguration</name>
+      <extends>sfPluginConfiguration</extends>
+      <full_name>chCmsExposeRoutingPluginConfiguration</full_name>
+      <docblock>
+        <description>chCmsExposeRoutingPlugin configuration.</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="chCmsExposeRoutingPlugin" line="3"/>
+        <tag name="subpackage" description="config" line="3"/>
+        <tag name="author" description="Your name here" line="3"/>
+        <tag name="version" description="SVN: $Id$" line="3"/>
+      </docblock>
+      <constant namespace="default" line="13">
+        <name>VERSION</name>
+        <value>1.0.0-DEV</value>
+      </constant>
+      <method final="false" abstract="false" static="false" visibility="public" line="18">
+        <name>initialize</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="see" description="sfPluginConfiguration" line="15"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="29">
+        <name>listenToRoutingLoadConfigurationEvent</name>
+        <docblock>
+          <description>listen to the routing.load_configuration</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="void" line="24">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$event</name>
+          <default/>
+          <type>sfEvent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="48">
+        <name>listenToLoadFactoriesEvent</name>
+        <docblock>
+          <description>listen to context.load_factory event</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="void" line="43">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="48">
+          <name>$event</name>
+          <default/>
+          <type>sfEvent</type>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="modules/chCmsExposeRouting/templates/indexSuccess.js.php" hash="a0e38ae0365ed1eef9c4f53f8763fb35"/>
+  <file path="modules/chCmsExposeRouting/lib/BasechCmsExposeRoutingActions.class.php" hash="b26ff416616b199d21449014f3939830">
+    <docblock>
+      <description>Base actions for the chCmsExposeRoutingPlugin chCmsExposeRouting module.</description>
+      <long-description>
+</long-description>
+      <tag name="package" description="chCmsExposeRoutingPlugin"/>
+      <tag name="subpackage" description="chCmsExposeRouting"/>
+      <tag name="author" description="Your name here"/>
+      <tag name="version" description="SVN: $Id$"/>
+    </docblock>
+    <class final="false" abstract="true" line="11" namespace="default">
+      <name>BasechCmsExposeRoutingActions</name>
+      <extends>sfActions</extends>
+      <full_name>BasechCmsExposeRoutingActions</full_name>
+      <docblock>
+        <description>Base actions for the chCmsExposeRoutingPlugin chCmsExposeRouting module.</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="chCmsExposeRoutingPlugin" line="3"/>
+        <tag name="subpackage" description="chCmsExposeRouting" line="3"/>
+        <tag name="author" description="Your name here" line="3"/>
+        <tag name="version" description="SVN: $Id$" line="3"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="protected" line="19">
+        <name>retrieveRoute</name>
+        <docblock>
+          <description>retrive matching route and check it can be displayed.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="the id of route to retrieve" type="string" variable="$route_id" line="13">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="sfRoute|null" line="13">
+            <type by_reference="false">sfRoute</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$route_id</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="19">
+          <name>$routing</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="41">
+        <name>applicationConfiguredRoutes</name>
+        <docblock>
+          <description>adds the application configured routes.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="array" line="36">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="41">
+          <name>$routing</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="62">
+        <name>autoDiscoverExposedRoutes</name>
+        <docblock>
+          <description>iterate over every routes to retrive routes
+with *app_expose* option set to true.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="array" line="56">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="62">
+          <name>$routing</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="88">
+        <name>executeIndex</name>
+        <docblock>
+          <description>retrieve all the routes that should be exposed</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="the user request" type="sfWebRequest" variable="$request" line="82">
+            <type by_reference="false">sfWebRequest</type>
+          </tag>
+          <tag name="return" description="" type="" line="82"/>
+        </docblock>
+        <argument line="88">
+          <name>$request</name>
+          <default/>
+          <type>sfWebRequest</type>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="modules/chCmsExposeRouting/actions/actions.class.php" hash="bfcb360553f60e6026cf726e31b3880f">
+    <include type="Require Once" line="3">
+      <name>/../lib/BasechCmsExposeRoutingActions.class.php</name>
+    </include>
+    <class final="false" abstract="false" line="13" namespace="default">
+      <name>chCmsExposeRoutingActions</name>
+      <extends>BasechCmsExposeRoutingActions</extends>
+      <full_name>chCmsExposeRoutingActions</full_name>
+      <docblock>
+        <description>chCmsExposeRouting actions.</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="chCmsExposeRoutingPlugin" line="5"/>
+        <tag name="subpackage" description="chCmsExposeRouting" line="5"/>
+        <tag name="author" description="Your name here" line="5"/>
+        <tag name="version" description="SVN: $Id$" line="5"/>
+      </docblock>
+    </class>
+  </file>
+  <package name=""/>
+  <package name="chCmsExposeRoutingPlugin">
+    <subpackage>config</subpackage>
+    <subpackage>chCmsExposeRouting</subpackage>
+  </package>
+  <namespace name="default"/>
+  <marker>todo</marker>
+  <marker>fixme</marker>
+</project>
