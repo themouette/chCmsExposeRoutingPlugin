@@ -2,7 +2,7 @@
 list of routes.
 auto generated.
 */
-var Routing = $.sfRouting;
+var Routing = $.ExposeRouting;
 
 Routing.prefix = <?php echo json_encode($options['context']['prefix']); ?>; 
 Routing.variablePrefix = <?php echo json_encode($options['variable_prefixes']); ?>; 

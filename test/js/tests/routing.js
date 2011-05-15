@@ -1,5 +1,5 @@
 //first export routing object:
-var Routing = $.sfRouting;
+var Routing = $.ExposeRouting;
 
 test('api definition', function() {
   expect(6);
