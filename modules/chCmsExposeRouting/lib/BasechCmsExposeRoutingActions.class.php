@@ -87,6 +87,14 @@ abstract class BasechCmsExposeRoutingActions extends sfActions
    */
   public function executeIndex(sfWebRequest $request)
   {
+    $csrf = array();
+    $form = new BaseForm();
+    if($form->isCSRFProtected())
+    {
+      $csrf[BaseForm::getCSRFFieldName()] = $form->getDefault(BaseForm::getCSRFFieldName()); 
+    }
+    $this->setVar('csrf', $csrf, true);
+
     $routing = $this->getContext()->getRouting();
 
     // set defaults
