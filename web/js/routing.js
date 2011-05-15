@@ -119,6 +119,13 @@ $.ExposeRouting = $.ExposeRouting || {};
        */
       prefix: '',
       /**
+       * the cross site request forgery defaults
+       *
+       * @param {Object}
+       * @api public
+       */
+      csrf: {},
+      /**
        * generate a route url from route id and params.
        *
        * @param {String}  route_id  the id of route to generate url for.
