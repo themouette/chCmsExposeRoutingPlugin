@@ -1,5 +1,46 @@
 <?xml version="1.0"?>
-<project version="0.10.0" title="">
+<project version="0.10.0" title="chCmsExposeRoutingPlugin api documentation">
+  <file path="lib/chCmsExposeRoutingTools.class.php" hash="f7c1219907b3e734264e13942bfc72de">
+    <docblock>
+      <description>This file declare the chCmsExposeRoutingTools class.</description>
+      <long-description>
+</long-description>
+      <tag name="package" description="chCmsExposeRoutingPlugin"/>
+      <tag name="subpackage" description="lib"/>
+      <tag name="author" description="Julien Muetton &amp;lt;julien_muetton@carpe-hora.com&amp;gt;"/>
+      <tag name="copyright" description="(c) Carpe Hora SARL 2011"/>
+      <tag name="since" description="2011-05-15"/>
+    </docblock>
+    <class final="false" abstract="false" line="15" namespace="default">
+      <name>chCmsExposeRoutingTools</name>
+      <extends/>
+      <full_name>chCmsExposeRoutingTools</full_name>
+      <docblock>
+        <description>the chCmsExposeRoutingPlugin tools.</description>
+        <long-description>
+</long-description>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" line="24">
+        <name>filterParameters</name>
+        <docblock>
+          <description>filter route parameters against a blacklist.</description>
+          <long-description>&lt;p&gt;balclist is read from app_ch_cms_expose_routing_params_blacklist config value&lt;/p&gt;
+</long-description>
+          <tag name="param" description="the paremeters to filte" type="array" variable="$params" line="17">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="return" description="" type="array" line="17">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="24">
+          <name>$params</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="config/chCmsExposeRoutingPluginConfiguration.class.php" hash="abdad1f0d32991d0a1926c2dbba1f3bd">
     <docblock>
       <description>chCmsExposeRoutingPlugin configuration.</description>
@@ -70,7 +111,7 @@
       </method>
     </class>
   </file>
-  <file path="modules/chCmsExposeRouting/templates/indexSuccess.js.php" hash="a0e38ae0365ed1eef9c4f53f8763fb35"/>
+  <file path="modules/chCmsExposeRouting/templates/indexSuccess.js.php" hash="d5fd29a4ba2b365e31676b306c1f0ec1"/>
   <file path="modules/chCmsExposeRouting/lib/BasechCmsExposeRoutingActions.class.php" hash="b26ff416616b199d21449014f3939830">
     <docblock>
       <description>Base actions for the chCmsExposeRoutingPlugin chCmsExposeRouting module.</description>
@@ -192,6 +233,7 @@ with *app_expose* option set to true.</description>
   </file>
   <package name=""/>
   <package name="chCmsExposeRoutingPlugin">
+    <subpackage>lib</subpackage>
     <subpackage>config</subpackage>
     <subpackage>chCmsExposeRouting</subpackage>
   </package>

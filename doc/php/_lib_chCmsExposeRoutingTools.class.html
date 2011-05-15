@@ -30,31 +30,82 @@
       $('dl.function-info, dl.constant-info, dl.property-info').hide();
       $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
       });
-    </script><a name="top"></a><h1 class="file">modules/chCmsExposeRouting/actions/actions.class.php</h1>
+    </script><a name="top"></a><h1 class="file">lib/chCmsExposeRoutingTools.class.php</h1>
 <div class="file_menu">
-<a href="#includes">Includes</a> <a href="#classes">Classes</a> </div>
+<a href="#classes">Classes</a> </div>
 <dl class="file-info">
+<dt>author</dt>
+<dd>Julien Muetton &lt;julien_muetton@carpe-hora.com&gt;</dd>
+<dt>copyright</dt>
+<dd>(c) Carpe Hora SARL 2011</dd>
+<dt>package</dt>
+<dd>chCmsExposeRoutingPlugin</dd>
+<dt>since</dt>
+<dd>2011-05-15</dd>
+<dt>subpackage</dt>
+<dd>lib</dd>
 <dt>Classes</dt>
-<dd><a class="class" href="#chCmsExposeRoutingActions">chCmsExposeRoutingActions</a></dd>
+<dd><a class="class" href="#chCmsExposeRoutingTools">chCmsExposeRoutingTools</a></dd>
 </dl>
-<a name="classes"></a><a id="chCmsExposeRoutingActions"></a><h2 class="class">chCmsExposeRoutingActions<div class="to-top"><a href="#top">jump to top</a></div>
+<h2>Description</h2>
+<p class="short-description">This file declare the chCmsExposeRoutingTools class.</p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="chCmsExposeRoutingTools"></a><h2 class="class">chCmsExposeRoutingTools<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
 <div class="class">
 <dl class="class-info">
-<dt>Extends from</dt>
-<dd><a href="_modules_chCmsExposeRouting_lib_BasechCmsExposeRoutingActions.class.html#BasechCmsExposeRoutingActions">BasechCmsExposeRoutingActions</a></dd>
-<dt>author</dt>
-<dd>Your name here</dd>
-<dt>package</dt>
-<dd>chCmsExposeRoutingPlugin</dd>
-<dt>subpackage</dt>
-<dd>chCmsExposeRouting</dd>
-<dt>version</dt>
-<dd>SVN: $Id$</dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#chCmsExposeRoutingTools::filterParameters()">filterParameters</a></dd>
 </dl>
 <h3>Description</h3>
-<p class="short-description">chCmsExposeRouting actions.</p>
+<p class="short-description">the chCmsExposeRoutingPlugin tools.</p>
 <div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="chCmsExposeRoutingTools::filterParameters()"></a><h4 class="method">filterParameters<div class="to-top"><a href="#chCmsExposeRoutingTools">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filterParameters</span><span class="nb-faded-text">(
+          array $params
+          )
+        </span>
+        :
+        array</code><p class="short-description">filter route parameters against a blacklist.</p>
+<div class="long-description"><p>balclist is read from app_ch_cms_expose_routing_params_blacklist config value</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$params</dt>
+<dd>array<br><em>the paremeters to filte</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 </div>
 </div>

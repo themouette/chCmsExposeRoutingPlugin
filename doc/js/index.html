@@ -132,7 +132,7 @@ to the client side.</p>
  </p>
 </td>
 <td class="code">
-<pre><code><span class="keyword">var</span> <span class="class">Routing</span> = <span class="class">Routing</span> || {};
+<pre><code>$.<span class="variable">sfRouting</span> = $.<span class="variable">sfRouting</span> || {};
 
 (<span class="keyword">function</span>(<span class="class">Routing</span>, $, <span class="variable">undefined</span>) {
 
@@ -372,7 +372,7 @@ having to be escaped.</p>
       }
     }; <span class="comment">// end of return</span>
   })());
-})(<span class="class">Routing</span>, <span class="variable">jQuery</span>);
+})($.<span class="variable">sfRouting</span>, <span class="variable">jQuery</span>);
 </code></pre>
 </td>
 </tr>	</body>
