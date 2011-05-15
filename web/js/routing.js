@@ -8,7 +8,7 @@
  * define Routing class
  */
 
-var Routing = Routing || {};
+$.sfRouting = $.sfRouting || {};
 
 (function(Routing, $, undefined) {
 
@@ -199,4 +199,4 @@ var Routing = Routing || {};
       }
     }; // end of return
   })());
-})(Routing, jQuery);
+})($.sfRouting, jQuery);
