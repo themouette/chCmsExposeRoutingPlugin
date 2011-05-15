@@ -121,6 +121,19 @@ app:
     auto_discover: false
 ```
 
+#### custom filter on exposed params
+
+in your application config ( _app.yml_ ), add the following:
+
+```yml
+app:
+  ch_cms_expose_routing:
+    params_blacklist:
+      - module
+      - action
+      - my_param
+```
+
 ### access routes in browser
 
 It's as simple as calling `Routing.generate('route_id', /* your params */)`.
@@ -138,5 +151,5 @@ $.get(Routing.generate('route_id', {"id": 10, "foo":"bar"}));
 TODO
 ----
 
-* add test structure
 * cache js routing
+* add simple way to call server with sf_method and csrf_token

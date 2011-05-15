@@ -1,3 +1,6 @@
+//first export routing object:
+var Routing = $.sfRouting;
+
 test('api definition', function() {
   expect(6);
 

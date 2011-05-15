@@ -2,6 +2,12 @@
 # http://www.symfony-project.org/reference/1_4/en/11-App
 
 # default values
+test_with_custom_blacklist:
+  ch_cms_expose_routing:
+    register_routes: true
+    register_scripts: true
+    params_blacklist: [module, foo]
+  
 test_without_auto_discover:
   ch_cms_expose_routing:
     auto_discover: false

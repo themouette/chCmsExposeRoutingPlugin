@@ -5,6 +5,11 @@ if (!isset($app))
   $app = 'frontend';
 }
 
+if (!isset($rootdir))
+{
+  $rootdir = dirname(__FILE__).'/../fixtures/project/';
+}
+
 require_once $_SERVER['SYMFONY'].'/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
 
@@ -17,5 +22,5 @@ chCmsExposeRoutingPlugin_cleanup();
 register_shutdown_function('chCmsExposeRoutingPlugin_cleanup');
 
 require_once dirname(__FILE__).'/../fixtures/project/config/ProjectConfiguration.class.php';
-$configuration = ProjectConfiguration::getApplicationConfiguration($app, 'test', isset($debug) ? $debug : true);
+$configuration = ProjectConfiguration::getApplicationConfiguration($app, 'test', isset($debug) ? $debug : true, $rootdir);
 sfContext::createInstance($configuration);

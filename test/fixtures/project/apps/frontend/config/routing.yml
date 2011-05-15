@@ -22,7 +22,7 @@ homepage:
 # please, remove them by adding more specific rules
 default_index:
   url:   /:module
-  param: { action: index }
+  param: { action: index, foo: bar }
 
 default:
   url:   /:module/:action/*
