@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="${projectName}" default="main">
+  <!-- Properties -->
+  <property name="dir.reports" value="${project.basedir}/build/logs" />
+  <property name="dir.doc"     value="${project.basedir}/doc" />
+  <!-- Clean target -->
+  <target name="clean">
+    <delete dir="${dir.reports}" />
+    <mkdir dir="${dir.reports}" />
+    <delete dir="${dir.doc}" />
+    <mkdir dir="${dir.doc}" />
+    <mkdir dir="${project.basedir}/logs/docblox/" />
+  </target>
+  <!-- Default target -->
+  <target name="main" depends="clean,test,pdepend,phpmd,phpcpd,phpcs,phploc,phpdoc">
+    <echo msg="All analysis done." />
+  </target>
+  <!-- PHP API Documentation -->
+  <target name="phpdoc" depends="clean">
+    <echo msg="PHP Documentor..." />
+    <exec command="docblox" dir="${project.basedir}" />
+  </target>
+  <!-- symfony test -->
+  <target name="test" depends="clean">
+    <echo msg="Running tests (sf1.3)" />
+    <exec command="${project.basedir}/test/bin/prove.php ../../../lib/sf13 ${dir.reports}/build-13.xml" dir="${project.basedir}" />
+    <echo msg="Running tests (sf1.4)" />
+    <exec command="${project.basedir}/test/bin/prove.php ../../../lib/sf14 ${dir.reports}/build-13.xml" dir="${project.basedir}" />
+  </target>
+
+  <!-- PHPLoc -->
+  <target name="phploc">
+    <taskdef name="phploc" classname="phing.tasks.ext.PHPLocTask" />
+    <phploc reportType="csv" reportName="phploc" reportDirectory="${dir.reports}" countTests="true">
+      <fileset dir="${project.basedir}">
+        <include name="**/*.php" />
+      </fileset>
+    </phploc>
+  </target>
+  <!-- PHP Mess Detector -->
+  <target name="phpmd">
+    <echo msg="PHP Mess Detector..." />
+    <phpmd rulesets="codesize,unusedcode">
+      <fileset dir="${project.basedir}">
+        <include name="**/*.php" />
+      </fileset>
+      <formatter type="xml" outfile="${dir.reports}/pmd.xml" />
+    </phpmd>
+  </target>
+  <!-- PHP copy/paste analysis -->
+  <target name="phpcpd">
+    <echo msg="PHP Copy/Paste..." />
+    <phpcpd>
+      <fileset dir="${project.basedir}">
+        <include name="**/*.php" />
+      </fileset>
+      <formatter type="pmd" outfile="${dir.reports}/pmd-cpd.xml" />
+    </phpcpd>
+  </target>
+  <!-- PHP dependency checker -->
+  <target name="pdepend">
+    <echo msg="PHP Depend..." />
+    <phpdepend>
+      <fileset dir="${project.basedir}">
+        <include name="**/*.php" />
+      </fileset>
+      <logger type="jdepend-xml" outfile="${dir.reports}/jdepend.xml" />
+      <logger type="jdepend-chart" outfile="${dir.reports}/dependencies.svg" />
+      <logger type="overview-pyramid" outfile="${dir.reports}/overview-pyramid.svg" />
+    </phpdepend>
+  </target>
+  <!-- PHP CodeSniffer -->
+  <target name="phpcs">
+    <echo msg="PHP CodeSniffer..." />
+    <phpcodesniffer standard="Symfony" showSniffs="true" showWarnings="true">
+      <fileset dir="${project.basedir}">
+        <include name="**/*.php" />
+        <exclude name="**/om/" />
+        <exclude name="**/base/" />
+        <exclude name="**/map/" />
+      </fileset>
+      <formatter type="checkstyle" outfile="${dir.reports}/checkstyle.xml" />
+    </phpcodesniffer>
+  </target>
+</project>
