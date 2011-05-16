@@ -1,10 +1,5 @@
 <?php
 
-if (!isset($_SERVER['SYMFONY']))
-{
-  $_SERVER['SYMFONY'] = '../../lib/vendor/symfony/lib/';
-}
-
 include dirname(__FILE__).'/../bootstrap/functional.php';
 
 $browser = new sfTestFunctional(new sfBrowser());

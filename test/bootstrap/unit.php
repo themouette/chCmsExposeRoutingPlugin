@@ -1,5 +1,7 @@
 <?php
 
+include(dirname(__FILE__).'/sf_test_lib.inc');
+
 if (!isset($_SERVER['SYMFONY']))
 {
   throw new RuntimeException('Could not find symfony core libraries.');

@@ -1,5 +1,12 @@
 <?php
 
+include(dirname(__FILE__).'/sf_test_lib.inc');
+
+if (!isset($_SERVER['SYMFONY']))
+{
+  $_SERVER['SYMFONY'] = '../../lib/vendor/symfony/lib/';
+}
+
 if (!isset($app))
 {
   $app = 'frontend';
