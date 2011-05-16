@@ -42,9 +42,9 @@ abstract class BasechCmsExposeRoutingActions extends sfActions
   {
     $routes = array();
 
-    foreach(sfConfig::get('app_ch_cms_expose_routing_routes_to_expose', array()) as $route_id)
+    foreach (sfConfig::get('app_ch_cms_expose_routing_routes_to_expose', array()) as $route_id)
     {
-      if($route = $this->retrieveRoute($route_id, $routing))
+      if ($route = $this->retrieveRoute($route_id, $routing))
       {
         $routes[$route_id] = $route;
       }
@@ -65,7 +65,7 @@ abstract class BasechCmsExposeRoutingActions extends sfActions
 
     if (sfConfig::get('app_ch_cms_expose_routing_auto_discover', true))
     {
-      foreach($routing->getRoutes() as $route_id => $route)
+      foreach ($routing->getRoutes() as $route_id => $route)
       {
         $options = $route->getOptions();
         
@@ -89,7 +89,7 @@ abstract class BasechCmsExposeRoutingActions extends sfActions
   {
     $csrf = array();
     $form = new BaseForm();
-    if($form->isCSRFProtected())
+    if ($form->isCSRFProtected())
     {
       $csrf[BaseForm::getCSRFFieldName()] = $form->getDefault(BaseForm::getCSRFFieldName()); 
     }
@@ -103,7 +103,6 @@ abstract class BasechCmsExposeRoutingActions extends sfActions
     $this->setVar('defaultParameters', $routing->getDefaultParameters(), true);
 
     // filter exposed routes
-    $routes = $routing->getRoutes();
     $exposed_routes = array_merge(
         $this->autoDiscoverExposedRoutes($routing),
         $this->applicationConfiguredRoutes($routing));
