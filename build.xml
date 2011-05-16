@@ -23,9 +23,9 @@
   <!-- symfony test -->
   <target name="test" depends="clean">
     <echo msg="Running tests (sf1.3)" />
-    <exec command="${project.basedir}/test/bin/prove.php ../../../lib/sf13 ${dir.reports}/build-13.xml" dir="${project.basedir}" />
+    <exec command="php ${project.basedir}/test/bin/prove.php ../../../lib/sf13/lib ${dir.reports}/build-13.xml" dir="${project.basedir}" />
     <echo msg="Running tests (sf1.4)" />
-    <exec command="${project.basedir}/test/bin/prove.php ../../../lib/sf14 ${dir.reports}/build-13.xml" dir="${project.basedir}" />
+    <exec command="php ${project.basedir}/test/bin/prove.php ../../../lib/sf14/lib ${dir.reports}/build-13.xml" dir="${project.basedir}" />
   </target>
 
   <!-- PHPLoc -->
