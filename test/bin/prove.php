@@ -1,14 +1,16 @@
 <?php
 
-if (count($argv) > 1 && !isset($_SERVER['SYMFONY']))
+$options = getopt("", array("symfony:", "xml:"));
+
+if (isset($options['symfony']))
 {
-  $_SERVER['SYMFONY'] = $argv[1];
+  $_SERVER['SYMFONY'] = $options['symfony'];
 }
 
 $xmlExport = false;
-if (count($argv) > 2)
+if (isset($options['xml']))
 {
-  $xmlExport = $argv[2];
+  $xmlExport = $options['xml'];
 }
 
 //default symfony look for project lib vendor
@@ -27,6 +29,7 @@ $ret = $h->run() ? 0 : 1;
 // publish xml results
 if ($xmlExport)
 {
+  echo sprintf("export to xml file %s", $xmlExport);
   file_put_contents($xmlExport, $h->to_xml());
 }
 
